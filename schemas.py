@@ -38,11 +38,12 @@ class Product(BaseModel):
     category: str = Field(..., description="Product category")
     in_stock: bool = Field(True, description="Whether product is in stock")
 
-# Add your own schemas here:
-# --------------------------------------------------
-
-# Note: The Flames database viewer will automatically:
-# 1. Read these schemas from GET /schema endpoint
-# 2. Use them for document validation when creating/editing
-# 3. Handle all database operations (CRUD) directly
-# 4. You don't need to create any database endpoints!
+# Mehndi enquiry schema
+class Enquiry(BaseModel):
+    """Booking/enquiry details for Mehndi service.
+    Collection name: "enquiry" (lowercase of class name)
+    """
+    name: str = Field(..., min_length=2, max_length=80, description="Customer full name")
+    phone: str = Field(..., min_length=8, max_length=20, description="Contact number")
+    date: str = Field(..., description="Event date in YYYY-MM-DD")
+    message: Optional[str] = Field(None, max_length=1000, description="Additional details")
